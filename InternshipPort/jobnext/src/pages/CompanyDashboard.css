@@ -1,0 +1,246 @@
+/* ============================================================
+   Company Dashboard Styles
+   ============================================================ */
+
+/* ---- Analytics Grid ---- */
+.company-analytics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.analytics-card {
+  padding: 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.analytics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.analytics-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.analytics-value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #0f4c75;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.analytics-label {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* ---- Section Header Row ---- */
+.company-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.section-heading {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+/* ---- Post Job Form ---- */
+.post-job-form {
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-job-form h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 1.25rem;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* ---- Job Listings ---- */
+.job-listings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.job-listing-card {
+  padding: 1.5rem;
+}
+
+.job-listing-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.job-listing-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.job-listing-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.job-listing-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.meta-text {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.job-listing-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ---- Applicants Section ---- */
+.applicants-section {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--gray-100);
+}
+
+.applicants-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin-bottom: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.applicants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.applicant-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.75rem 1rem;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-100);
+  flex-wrap: wrap;
+  transition: var(--transition);
+}
+
+.applicant-row:hover {
+  background: var(--brand-primary-light);
+  border-color: var(--brand-primary-light);
+}
+
+.applicant-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.applicant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.applicant-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.applicant-college {
+  font-size: 0.775rem;
+  color: var(--gray-500);
+}
+
+.applicant-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .company-analytics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .job-listing-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-listing-actions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .company-analytics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .applicant-row {
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+
+  .applicant-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

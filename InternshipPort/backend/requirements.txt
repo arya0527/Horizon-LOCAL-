@@ -1,0 +1,15 @@
+Flask==3.1.1
+flask-cors==6.0.2
+Flask-MySQLdb==2.0.0
+mysqlclient==2.2.8
+bcrypt==5.0.0
+PyJWT==2.13.0
+mysql-connector-python==9.0.0
+pandas
+scikit-learn
+spacy
+PyPDF2
+sentence-transformers
+gunicorn
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+python-dotenv==1.0.1

@@ -1,0 +1,226 @@
+.student-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.student-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 80px;
+}
+
+.profile-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--brand-primary-light), #e0f2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  border: 3px solid var(--brand-primary-light);
+}
+
+.profile-name {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.profile-college {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.profile-completion {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.profile-completion-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.profile-pct {
+  color: var(--brand-primary);
+}
+
+.profile-completion-hint {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  text-align: left;
+}
+
+.resume-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.skill-gap-card {
+  padding: 1.375rem;
+}
+
+.skill-gap-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.skill-gap-subtitle {
+  font-size: 0.8125rem;
+  color: var(--gray-400);
+  margin-bottom: 1rem;
+}
+
+.skill-gap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.skill-gap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.skill-gap-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skill-gap-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.skill-priority {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.skill-priority.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.skill-priority.medium {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.skill-priority.low {
+  background: var(--match-green-bg);
+  color: var(--match-green);
+}
+
+.skill-gap-resource {
+  font-size: 0.75rem;
+  color: var(--brand-primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.skill-gap-resource:hover {
+  color: var(--brand-primary-dark);
+  text-decoration: underline;
+}
+
+.student-main {
+  min-width: 0;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.applied-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.applied-item {
+  padding: 1.125rem 1.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.applied-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+
+.applied-company {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.applied-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.applied-date {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+}
+
+@media (max-width: 900px) {
+  .student-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .student-sidebar {
+    position: static;
+  }
+
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+}

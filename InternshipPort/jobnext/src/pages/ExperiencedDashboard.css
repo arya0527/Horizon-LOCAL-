@@ -1,0 +1,152 @@
+.exp-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.exp-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 80px;
+}
+
+.filter-card {
+  padding: 1.375rem;
+}
+
+.filter-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--exp-primary);
+  margin-bottom: 1.25rem;
+}
+
+.filter-group {
+  margin-bottom: 1.25rem;
+}
+
+.filter-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-chip {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: var(--gray-100);
+  color: var(--gray-600);
+  border: 1.5px solid var(--gray-200);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-chip:hover {
+  border-color: var(--exp-primary);
+  color: var(--exp-primary);
+}
+
+.filter-chip.active {
+  background: var(--exp-primary-light);
+  color: var(--exp-primary);
+  border-color: var(--exp-primary);
+  font-weight: 600;
+}
+
+.skill-improve-card {
+  padding: 1.375rem;
+}
+
+.skill-reason {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  line-height: 1.4;
+}
+
+.exp-main {
+  min-width: 0;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.applied-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.applied-item {
+  padding: 1.125rem 1.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.applied-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+
+.applied-company {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.applied-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.applied-date {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--gray-400);
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--gray-300);
+}
+
+@media (max-width: 900px) {
+  .exp-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-sidebar {
+    position: static;
+  }
+
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+}

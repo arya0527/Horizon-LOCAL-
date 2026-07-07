@@ -1,0 +1,184 @@
+/* ============================================================
+   HORIZON NEXT — Modal Dialog Styles
+   ============================================================ */
+
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalContentScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: modalBackdropFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.modal-container {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), var(--shadow-lg);
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  position: relative;
+  animation: modalContentScaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: var(--gray-100);
+  border: none;
+  color: var(--gray-500);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.modal-close-btn:hover {
+  background: var(--gray-200);
+  color: var(--gray-900);
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  padding: 2.25rem 2rem 1.25rem;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.modal-subtitle {
+  font-size: 0.9375rem;
+  color: var(--gray-500);
+}
+
+.modal-body {
+  padding: 0 2rem 2.25rem;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.modal-input-wrapper {
+  position: relative;
+}
+
+.modal-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  color: var(--gray-800);
+  background: var(--gray-50);
+  transition: var(--transition);
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.12);
+}
+
+.modal-input::placeholder {
+  color: var(--gray-400);
+}
+
+.modal-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  color: #ffffff;
+  padding: 0.8125rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  transition: var(--transition);
+  margin-top: 0.5rem;
+}
+
+.modal-submit-btn:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.modal-submit-btn:active {
+  transform: translateY(0);
+}
+
+.modal-footer-toggle {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.modal-toggle-link {
+  color: var(--brand-primary);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  transition: var(--transition);
+}
+
+.modal-toggle-link:hover {
+  color: var(--brand-primary-dark);
+}

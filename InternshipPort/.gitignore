@@ -1,0 +1,72 @@
+# ==============================================================================
+# HorizonNext Recommendation System - Production GitIgnore
+# ==============================================================================
+
+# 1. Virtual Environments (Python)
+venv/
+backend/venv/
+.venv/
+env/
+ENV/
+backend/env/
+backend/.env
+
+# 2. Node Modules, Cache, and Builds (React/Vite)
+node_modules/
+jobnext/node_modules/
+dist/
+jobnext/dist/
+build/
+jobnext/build/
+.vite/
+jobnext/.vite/
+.eslintcache
+coverage/
+
+# 3. Python Cache, Compiled files, and Testing
+__pycache__/
+*/__pycache__/
+backend/__pycache__/
+backend/routes/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# 4. Large Datasets & Database dumps
+backend/datasets/final_jobs.csv
+backend/datasets/*.csv
+!backend/datasets/internships.csv # Keep the tiny 8-row internship sample CSV
+
+# 5. Local Uploads & Logs
+uploads/
+backend/uploads/
+*.log
+backend/*.log
+
+# 6. SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# 7. AI Model, spaCy, HuggingFace, and PyTorch Caches
+.cache/
+.cache/huggingface/
+.cache/torch/
+en_core_web_sm/
+backend/en_core_web_sm/
+
+# 8. IDEs & Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# 9. Environment Variables & Secrets (NEVER track .env files)
+.env
+jobnext/.env
+backend/.env
+# Note: config.py is NOT ignored here. It is safe to track because it has been updated
+# to read sensitive database credentials from environment variables.
