@@ -224,7 +224,8 @@ Traditional recommenders often produce repetitive results.
 
 
 ### Metrics Analysis
-<img width="959" height="503" alt="image" src="https://github.com/user-attachments/assets/e6c90aea-882f-4f5e-979e-f6b881251835" />
+<img width="950" height="502" alt="image" src="https://github.com/user-attachments/assets/be2e1750-1d84-4a50-add9-4ed9e3d9771e" />
+
 
 
 
