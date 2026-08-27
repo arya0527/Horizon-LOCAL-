@@ -198,13 +198,13 @@ Traditional recommenders often produce repetitive results.
 
 | Metric | Score |
 |----------|----------|
-| Precision@5 | 75.17% |
-| Recall@5 | 72.00% |
-| NDCG@5 | 65.03% |
-| MAP@5 | 52.96% |
-| Hit Rate@5 | 100.00% |
-| Coverage | 59.50% |
-| Diversity | 41.03% |
+| Precision@5 | 76.97% |
+| Recall@5 | 74.47% |
+| NDCG@5 | 67.21% |
+| MAP@5 | 54.81% |
+| Hit Rate@5 | 97.96% |
+| Coverage | 64.50% |
+| Diversity | 45.65% |
 
 ---
 
