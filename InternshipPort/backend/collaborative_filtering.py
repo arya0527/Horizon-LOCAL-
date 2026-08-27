@@ -5,6 +5,8 @@ from sklearn.preprocessing import MinMaxScaler
 from scipy.sparse.linalg import svds
 from sentence_transformers import SentenceTransformer
 
+import re
+
 # Skill Standardization Ontology Mapper
 ONTOLOGY_EXPANSIONS = {
     "ML": "Machine Learning", "AI": "Artificial Intelligence",
@@ -56,15 +58,60 @@ def map_user_skills_to_codes(user_skills):
     mapped_codes = set()
     valid_codes = {
         "IT", "ENG", "PRJM", "SALE", "BD", "MRKT", "FIN", "ACCT", 
-        "HCPR", "RSCH", "DSGN", "ART", "MGMT", "LGL", "EDU", "TRNG", "ADM"
+        "HCPR", "RSCH", "DSGN", "ART", "MGMT", "LGL", "EDU", "TRNG", "ADM", "ML", "AI"
+    }
+    
+    keyword_to_code = {
+        # IT / Software
+        "software": "IT", "developer": "IT", "programming": "IT", "coding": "IT",
+        "react": "IT", "python": "IT", "java": "IT", "node": "IT", "javascript": "IT",
+        "typescript": "IT", "flutter": "IT", "git": "IT", "aws": "IT", "docker": "IT",
+        "kubernetes": "IT", "html": "IT", "css": "IT", "sql": "IT", "mongodb": "IT",
+        "database": "IT", "c++": "IT", "c#": "IT", "web": "IT", "frontend": "IT", "backend": "IT",
+        # ML / AI
+        "machine learning": "ML", "ml": "ML", "artificial intelligence": "AI", "ai": "AI",
+        "deep learning": "AI", "nlp": "AI", "computer vision": "AI", "data science": "IT",
+        # Marketing
+        "marketing": "MRKT", "mrkt": "MRKT", "seo": "MRKT", "social media": "MRKT",
+        "advertising": "MRKT", "pr": "MRKT", "public relations": "MRKT", "brand": "MRKT",
+        # Sales
+        "sales": "SALE", "sale": "SALE", "selling": "SALE",
+        # Business Development
+        "business development": "BD", "bd": "BD",
+        # Finance & Accounting
+        "finance": "FIN", "fin": "FIN", "accounting": "ACCT", "acct": "ACCT", "audit": "FIN",
+        # Management & Project Management
+        "management": "MGMT", "mgmt": "MGMT", "manager": "MGMT",
+        "project management": "PRJM", "prjm": "PRJM", "scrum": "PRJM", "agile": "PRJM",
+        # Design & Art
+        "design": "DSGN", "dsgn": "DSGN", "ux": "DSGN", "ui": "DSGN", "figma": "DSGN",
+        "art": "ART", "graphic": "DSGN",
+        # Healthcare
+        "healthcare": "HCPR", "hcpr": "HCPR", "medical": "HCPR", "therapist": "HCPR", "clinical": "HCPR",
+        # HR
+        "human resources": "HR", "hr": "HR", "recruiting": "HR",
     }
     
     for skill in skills:
-        if skill in ONTOLOGY_EXPANSIONS:
-            mapped_codes.add(skill.upper())
-        elif skill.upper() in valid_codes:
-            mapped_codes.add(skill.upper())
-                    
+        skill_upper = skill.upper()
+        if skill_upper in valid_codes:
+            mapped_codes.add(skill_upper)
+            continue
+            
+        matched = False
+        for code, full_name in ONTOLOGY_EXPANSIONS.items():
+            if skill_upper == code or skill == full_name.lower():
+                mapped_codes.add(code)
+                matched = True
+                break
+        if matched:
+            continue
+            
+        for keyword, code in keyword_to_code.items():
+            if re.search(rf"\b{re.escape(keyword)}\b", skill):
+                mapped_codes.add(code)
+                matched = True
+                
     return ", ".join(mapped_codes) if mapped_codes else user_skills
 
 _sbert_model = None

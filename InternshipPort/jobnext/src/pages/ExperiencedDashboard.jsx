@@ -37,7 +37,7 @@ export default function ExperiencedDashboard({ activePage, setActivePage }) {
                 title: job.role || 'Senior Developer',
                 company: job.company_name || 'Enterprise Client',
                 location: job.location || 'Remote',
-                match: Math.round(job.match_percentage) || 85,
+                match: (job.match_percentage !== undefined && job.match_percentage !== null) ? Math.round(job.match_percentage) : 85,
                 salary: job.salary || 'Competitive',
                 type: 'job',
                 skills: job.required_skills 
@@ -155,7 +155,7 @@ export default function ExperiencedDashboard({ activePage, setActivePage }) {
           title: job.role || 'Senior Developer',
           company: job.company_name || 'Enterprise Client',
           location: job.location || 'Remote',
-          match: Math.round(job.match_percentage) || 85,
+          match: (job.match_percentage !== undefined && job.match_percentage !== null) ? Math.round(job.match_percentage) : 85,
           salary: job.salary || 'Competitive',
           type: 'job',
           skills: job.required_skills 

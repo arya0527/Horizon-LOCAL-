@@ -6,7 +6,7 @@ import pandas as pd
 
 from database import mysql
 from recommendation import recommend_internships
-from collaborative_filtering import get_hybrid_recommendations
+from recommendation import get_collaborative_recommendations
 
 recommendation_bp = Blueprint(
     "recommendation",
@@ -45,8 +45,14 @@ def recommend():
 def collaborative_recommendations(user_id):
     try:
         alpha = request.args.get("alpha", 0.5, type=float)
+        role = request.args.get("role", "")
         cursor = mysql.connection.cursor()
-        recommendations = get_hybrid_recommendations(user_id, cursor, alpha=alpha)
+        recommendations = get_collaborative_recommendations(
+            user_id,
+            cursor,
+            desired_role=role,
+            alpha=alpha
+        )
         cursor.close()
         return jsonify({
             "status": "success",
@@ -120,4 +126,4 @@ def record_interaction():
         return jsonify({
             "status": "error",
             "message": str(e)
-        }), 500
+        }), 500

@@ -24,6 +24,10 @@ export default function StudentDashboard({ activePage, setActivePage }) {
         let url = `${API_BASE_URL}/internships`;
         if (user && user.user_id) {
           url = `${API_BASE_URL}/recommend/collaborative/${user.user_id}`;
+          const preferredRole = user.desired_role || user.preferred_role || '';
+          if (preferredRole) {
+            url += `?role=${encodeURIComponent(preferredRole)}`;
+          }
         }
         const response = await fetch(url);
         if (response.ok) {
@@ -35,7 +39,7 @@ export default function StudentDashboard({ activePage, setActivePage }) {
               title: item.title || item.role || 'Internship Role',
               company: item.company || item.company_name || 'Partner Company',
               location: item.location || 'Remote',
-              match: item.match_percentage ? Math.round(item.match_percentage) : (item.match_score ? Math.round(item.match_score) : 80 - idx * 5),
+              match: (item.match_percentage !== undefined && item.match_percentage !== null) ? Math.round(item.match_percentage) : ((item.match_score !== undefined && item.match_score !== null) ? Math.round(item.match_score) : 80 - idx * 5),
               salary: item.salary || 'Competitive',
               type: 'internship',
               skills: item.skills
@@ -155,7 +159,7 @@ export default function StudentDashboard({ activePage, setActivePage }) {
           title: job.role || 'Software Engineer',
           company: job.company_name || 'Tech Partner',
           location: job.location || 'Remote',
-          match: Math.round(job.match_percentage) || 85,
+          match: (job.match_percentage !== undefined && job.match_percentage !== null) ? Math.round(job.match_percentage) : 85,
           salary: job.salary || 'Competitive',
           type: 'internship',
           skills: job.missing_skills && job.missing_skills.length > 0 

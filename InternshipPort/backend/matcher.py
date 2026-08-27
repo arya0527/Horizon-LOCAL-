@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -31,13 +32,17 @@ def classify_resume_domain(resume_skills):
     # Check lowercased flat skills text
     skills_flat = " ".join(resume_skills).lower()
     
-    has_marketing = any(k in skills_flat for k in marketing_keywords)
-    has_software = any(k in skills_flat for k in software_keywords)
+    has_marketing = any(re.search(rf"\b{re.escape(k)}\b", skills_flat) for k in marketing_keywords)
+    has_software = any(re.search(rf"\b{re.escape(k)}\b", skills_flat) for k in software_keywords)
     
-    if has_marketing:
+    if has_marketing and not has_software:
         return "Marketing"
-    elif has_software:
+    elif has_software and not has_marketing:
         return "Software"
+    elif has_marketing and has_software:
+        m_count = sum(1 for k in marketing_keywords if re.search(rf"\b{re.escape(k)}\b", skills_flat))
+        s_count = sum(1 for k in software_keywords if re.search(rf"\b{re.escape(k)}\b", skills_flat))
+        return "Marketing" if m_count > s_count else "Software"
     return "Other"
 
 def match_jobs(resume_skills, jobs_df):
@@ -95,7 +100,7 @@ def match_jobs(resume_skills, jobs_df):
         
         if user_codes_clean and job_codes_clean:
             overlap = len(user_codes_clean & job_codes_clean)
-            penalties.append(1.0 if overlap > 0 else 0.0)
+            penalties.append(1.0 if overlap > 0 else 0.1)
         else:
             penalties.append(1.0)
             
