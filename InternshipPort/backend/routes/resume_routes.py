@@ -62,6 +62,20 @@ def upload_resume():
         resume_text
     )
 
+    # UPDATE USER SKILLS IN MYSQL IF USER_ID IS PASSED
+    user_id = request.form.get("user_id")
+    if user_id and extracted_skills:
+        try:
+            update_cursor = mysql.connection.cursor()
+            update_cursor.execute(
+                "UPDATE users SET skills = %s WHERE user_id = %s",
+                (", ".join(extracted_skills), user_id)
+            )
+            mysql.connection.commit()
+            update_cursor.close()
+        except Exception as e:
+            print("Failed to update user skills in DB:", e)
+
     # FETCH JOBS FROM MYSQL
 
     cursor = mysql.connection.cursor()
@@ -99,26 +113,17 @@ def upload_resume():
     )
 
     results = []
+    raw_codes = {"eng", "it", "prjm", "mrkt", "sale", "bd", "dsgn", "art", "hcpr", "othr", "mnfc", "acct", "fin", "mgmt", "rsch", "lgl", "edu", "trng", "adm", "ml", "ai"}
 
     for _, row in recommendations.iterrows():
 
-        required_skills = str(
-            row["required_skills"]
-        ).lower()
-
-        required_skills = [
-            skill.strip()
-
-            for skill in required_skills.split(",")
-        ]
+        req_skills_raw = str(row["required_skills"]).lower()
+        req_skills_list = [s.strip() for s in req_skills_raw.split(",") if s.strip()]
 
         missing_skills = []
-
-        for skill in required_skills:
-
-            if skill not in extracted_skills:
-
-                missing_skills.append(skill)
+        for skill in req_skills_list:
+            if skill not in extracted_skills and skill not in raw_codes:
+                missing_skills.append(skill.title())
 
         results.append({
 

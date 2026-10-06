@@ -1106,22 +1106,9 @@ def get_hybrid_recommendations(
         for job_id in top_items
     }
 
-    jobs_df[
-        "match_percentage"
-    ] = jobs_df[
-        "job_id"
-    ].map(
-        lambda job_id:
-            min(
-                100.0,
-                round(
-                    score_dict.get(
-                        job_id,
-                        0.0
-                    ) * 100,
-                    2
-                )
-            )
+    jobs_df["match_percentage"] = jobs_df["job_id"].map(
+        lambda job_id: min(98.0, max(30.0, round((score_dict.get(job_id, 0.0) * 240.0) + 15.0, 2)))
+        if score_dict.get(job_id, 0.0) > 0 else 0.0
     )
 
     # --------------------------------------------------------
@@ -1421,21 +1408,9 @@ def get_fallback_recommendations(
     # Match percentage
     # --------------------------------------------------------
 
-    jobs_df[
-        "match_percentage"
-    ] = jobs_df[
-        "job_id"
-    ].map(
-        lambda job_id:
-            min(
-                100.0,
-                round(
-                    content_scores[
-                        job_id
-                    ] * 100,
-                    2
-                )
-            )
+    jobs_df["match_percentage"] = jobs_df["job_id"].map(
+        lambda job_id: min(98.0, max(30.0, round((content_scores.get(job_id, 0.0) * 240.0) + 15.0, 2)))
+        if content_scores.get(job_id, 0.0) > 0 else 0.0
     )
 
     # --------------------------------------------------------

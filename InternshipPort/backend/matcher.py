@@ -45,6 +45,20 @@ def classify_resume_domain(resume_skills):
         return "Marketing" if m_count > s_count else "Software"
     return "Other"
 
+def build_job_text(row):
+    role = str(row.get("role", "") or "").strip()
+    req_skills = standardize_skills_text(str(row.get("required_skills", "") or ""))
+    desc = str(row.get("description", "") or "").strip()
+    
+    parts = []
+    if role:
+        parts.append(f"Role: {role}")
+    if req_skills:
+        parts.append(f"Required Skills: {req_skills}")
+    if desc:
+        parts.append(f"Description: {desc[:300]}")
+    return ". ".join(parts)
+
 def match_jobs(resume_skills, jobs_df):
     model = get_sbert_model()
     
@@ -81,8 +95,8 @@ def match_jobs(resume_skills, jobs_df):
     std_resume = standardize_skills_text(resume_text)
     user_codes = set(map_user_skills_to_codes(resume_text).split(", "))
     
-    # 4. Standardize jobs required skills
-    filtered_jobs_df["standardized_skills"] = filtered_jobs_df["required_skills"].map(standardize_skills_text)
+    # 4. Standardize jobs text using role, required skills, and description
+    filtered_jobs_df["standardized_skills"] = filtered_jobs_df.apply(build_job_text, axis=1)
     
     # 5. Compute SBERT similarity
     user_emb = model.encode([std_resume])
@@ -104,7 +118,11 @@ def match_jobs(resume_skills, jobs_df):
         else:
             penalties.append(1.0)
             
-    filtered_jobs_df["match_percentage"] = similarity * np.array(penalties) * 100.0
+    raw_scores = similarity * np.array(penalties)
+    filtered_jobs_df["match_percentage"] = [
+        min(98.0, max(30.0, round((s * 240.0) + 15.0, 2))) if s > 0 else 0.0
+        for s in raw_scores
+    ]
     
     # Sort and return top 10
     recommendations = filtered_jobs_df.sort_values(
@@ -112,3 +130,4 @@ def match_jobs(resume_skills, jobs_df):
         ascending=False
     )
     return recommendations.head(10)
+

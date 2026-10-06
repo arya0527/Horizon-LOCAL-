@@ -129,6 +129,9 @@ export default function StudentDashboard({ activePage, setActivePage }) {
     try {
       const formData = new FormData();
       formData.append('resume', file);
+      if (user && user.user_id) {
+        formData.append('user_id', user.user_id);
+      }
 
       const response = await fetch(`${API_BASE_URL}/upload_resume`, {
         method: 'POST',
@@ -162,9 +165,11 @@ export default function StudentDashboard({ activePage, setActivePage }) {
           match: (job.match_percentage !== undefined && job.match_percentage !== null) ? Math.round(job.match_percentage) : 85,
           salary: job.salary || 'Competitive',
           type: 'internship',
-          skills: job.missing_skills && job.missing_skills.length > 0 
-            ? ['React', ...job.missing_skills.slice(0, 2)] 
-            : ['React', 'Node.js'],
+          skills: (job.missing_skills && job.missing_skills.length > 0)
+            ? job.missing_skills
+            : (job.required_skills 
+                ? (typeof job.required_skills === 'string' ? job.required_skills.split(/[\s,]+/) : job.required_skills)
+                : ['React', 'Python']),
           logo: '🏢',
         }));
         setDisplayedJobs(formattedJobs);

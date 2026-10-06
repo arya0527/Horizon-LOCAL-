@@ -319,7 +319,7 @@ def get_hybrid_recommendations(user_id, cursor, top_n=10, alpha=0.5):
     
     # Calculate match percentage
     scores_dict = {jid: hybrid_scores[jid] for jid in top_items}
-    jobs_df["match_percentage"] = jobs_df["job_id"].map(lambda x: min(100.0, round(scores_dict.get(x, 0.0) * 100, 2)))
+    jobs_df["match_percentage"] = jobs_df["job_id"].map(lambda x: min(98.0, max(30.0, round((scores_dict.get(x, 0.0) * 240.0) + 15.0, 2))) if scores_dict.get(x, 0.0) > 0 else 0.0)
     
     # Keep the MMR order
     jobs_df["rank"] = jobs_df["job_id"].map(lambda x: top_items.index(x))
@@ -379,7 +379,7 @@ def get_fallback_recommendations(user_id, cursor, top_n=10):
     top_items = select_top_k_mmr(content_scores, job_job_sim, job_idx_map, K=min(top_n, len(jobs_df)), lmbda=0.5)
     
     jobs_df = jobs_df[jobs_df["job_id"].isin(top_items)].copy()
-    jobs_df["match_percentage"] = jobs_df["job_id"].map(lambda x: min(100.0, round(content_scores[x] * 100, 2)))
+    jobs_df["match_percentage"] = jobs_df["job_id"].map(lambda x: min(98.0, max(30.0, round((content_scores.get(x, 0.0) * 240.0) + 15.0, 2))) if content_scores.get(x, 0.0) > 0 else 0.0)
     jobs_df["rank"] = jobs_df["job_id"].map(lambda x: top_items.index(x))
     
     return jobs_df.sort_values(by="rank").drop(columns=["rank"]).to_dict(orient="records")
