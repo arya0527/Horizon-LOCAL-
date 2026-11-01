@@ -2,15 +2,11 @@ import re
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer
 from collaborative_filtering import standardize_skills_text, map_user_skills_to_codes
 
-_sbert_model = None
+from sbert_singleton import sbert_model as _sbert_model
 
 def get_sbert_model():
-    global _sbert_model
-    if _sbert_model is None:
-        _sbert_model = SentenceTransformer("all-MiniLM-L6-v2")
     return _sbert_model
 
 def classify_resume_domain(resume_skills):
@@ -130,4 +126,3 @@ def match_jobs(resume_skills, jobs_df):
         ascending=False
     )
     return recommendations.head(10)
-

@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
 from scipy.sparse.linalg import svds
-from sentence_transformers import SentenceTransformer
+from sbert_singleton import sbert_model as _sbert_model
 
 
 # ============================================================
@@ -90,19 +90,7 @@ def standardize_skills_text(skills_str):
 # SBERT MODEL
 # ============================================================
 
-_sbert_model = None
-
-
 def get_sbert_model():
-
-    global _sbert_model
-
-    if _sbert_model is None:
-
-        _sbert_model = SentenceTransformer(
-            "all-MiniLM-L6-v2"
-        )
-
     return _sbert_model
 
 
